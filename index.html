@@ -1,38 +1,53 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Sales Log · Styled</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Sales Log</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
-    <div class="app-container">
-        <h1>Daily Sales Log</h1>
-        <div class="subhead">Add sales entries & track total instantly</div>
-    
+
+  <div class="app-container">
+
+    <h1>Daily Sales Log</h1>
+    <div class="subhead">Add sales entries &amp; track total instantly</div>
+
+    <!-- ===== list screen ===== -->
     <button id="add-sales-btn">Add Sales for the day</button>
-
     <div id="sales-cards"></div>
-    <div id="sales"></div>
 
+    <!-- ===== saved-sale modal screen ===== -->
+    <div id="sales-modal-open">
+      <button class="back">
+        <i class="fa-solid fa-arrow-left-long"></i> Back
+      </button>
+      <div id="sales-items"></div>
+    </div>
+
+    <!-- ===== input screen ===== -->
     <div class="input-groups">
-        <button class="back-btn"><i class="fa-solid fa-arrow-left-long"></i> Back</button>
-    <div class="input-group">
+      <button class="back-btn">
+        <i class="fa-solid fa-arrow-left-long"></i> Back
+      </button>
+
+      <div class="input-group">
         <input type="text" placeholder="Description" id="sales-input">
         <input type="number" placeholder="Amount" id="amount" step="any">
         <button id="add-btn">Add Sales</button>
         <button id="save-btn">Save</button>
+      </div>
+
+      <div id="items"></div>
     </div>
-    <div id="items"></div>
-    </div>
-    </div>
+
+  </div>
+
+  <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
 </html>
