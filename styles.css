@@ -196,10 +196,12 @@ h1::before {
 }
 
 #amount {
+    width: 150px;
   flex: 0 1 130px;
 }
 
 #add-btn,
+#save-btn,
 #add-sales-btn,
 .back-btn {
   font-family: "Inter", sans-serif;
@@ -224,14 +226,18 @@ h1::before {
 }
 
 #add-btn:hover,
-#add-sales-btn:hover {
+#add-sales-btn:hover,
+.back-btn:hover,
+#save-btn:hover {
   background: #124c66;
   box-shadow: 0 8px 16px -4px rgba(18, 76, 102, 0.4);
   transform: translateY(-1px);
 }
 
 #add-btn:active,
-#add-sales-btn:active {
+#add-sales-btn:active,
+.back-btn:active,
+#save-btn:active  {
   transform: translateY(1px);
   box-shadow: 0 3px 6px -2px rgba(18, 76, 102, 0.3);
 }

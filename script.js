@@ -4,13 +4,10 @@ const addBtn = document.getElementById("add-btn");
 const items = document.getElementById("items");
 const addSalesBtn = document.getElementById("add-sales-btn");
 const salesCards = document.getElementById("sales-cards");
-const inputGroup = document.querySelector(".input-group");
 const inputGroups = document.querySelector(".input-groups");
 const backBtn = document.querySelector(".back-btn");
-
-addSalesBtn.addEventListener("click", openSalesModal)
-addBtn.addEventListener("click", addSales);
-backBtn.addEventListener("click", goBack)
+const saveBtn = document.getElementById("save-btn");
+const sales = document.getElementById("sales");
 
 function openSalesModal(){
     inputGroups.style.display = "flex";
@@ -18,30 +15,6 @@ function openSalesModal(){
     salesCards.style.display= "none"
     addSalesBtn.style.display = "none";
 }
-
-const salesCardsList = [
-    {id: 1, date: "2026-09-01", amount: "20,000"},
-    {id: 2, date: "2026-09-02", amount: "20,000"},
-    {id: 3, date: "2026-09-03", amount: "20,000"},
-    {id: 4, date: "2026-09-04", amount: "20,000"},
-    {id: 5, date: "2026-09-05", amount: "20,000"},
-    {id: 6, date: "2026-09-06", amount: "20,000"},
-    {id: 7, date: "2026-09-07", amount: "20,000"},
-    {id: 8, date: "2026-09-08", amount: "20,000"},
-    {id: 9, date: "2026-09-09", amount: "20,000"},
-    {id: 10, date: "2026-09-10", amount: "20,000"},
-    {id: 11, date: "2026-09-11", amount: "20,000"},
-    {id: 12, date: "2026-09-12", amount: "20,000"},
-]
-
-salesCards.innerHTML = salesCardsList.map((sales, index ) => 
-    `
-    <div class="sales-card" key=${index}>
-    <p>${sales.date}</p>
-    <p>${sales.amount}</p>
-    </div>
-    `
-).join("")
 
 function goBack(){
     inputGroups.style.display = "none"
@@ -96,6 +69,58 @@ function addSales() {
             <p>₦${totalAmount.toLocaleString()}</p>
             `;
 }
+
+
+const salesCardsList = JSON.parse(localStorage.getItem("salesCards")) || []
+
+function renderSalesCardList(){
+
+   salesCards.innerHTML = salesCardsList.map((sales, index ) => 
+    `
+    <div class="sales-card" data-index="${index}">
+    <p>${sales.date}</p>
+    <p>${sales.amount}</p>
+    </div>
+    `
+).join("")
+}
+
+function saveSalesList(){
+    const date = new Date().toLocaleDateString("en-CA")
+    if (salesList.length === 0) return;
+
+    let totalAmount = 0;
+    for (const sale of salesList) {
+        totalAmount += Number(sale.amount);
+    }
+    
+    const salesListInput = {
+        date: date,
+        amount: totalAmount,
+        sales: [...salesList]
+    }
+    salesCardsList.push(salesListInput)
+    salesList.length = 0;
+    items.innerHTML = ""
+    localStorage.setItem("salesCards", JSON.stringify(salesCardsList))
+    renderSalesCardList()
+    goBack()
+}
+
+salesCards.addEventListener('click', openSalesList)
+
+function openSalesList(e){
+const clickedIndex =  e.target.closest(".sales-card").dataset.index
+console.log(clickedIndex)
+}
+
+
+
+
+addSalesBtn.addEventListener("click", openSalesModal)
+addBtn.addEventListener("click", addSales);
+backBtn.addEventListener("click", goBack)
+saveBtn.addEventListener('click', saveSalesList)
 salesInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
@@ -108,3 +133,5 @@ amount.addEventListener("keypress", (e) => {
     addSales();
   }
 });
+
+renderSalesCardList()
